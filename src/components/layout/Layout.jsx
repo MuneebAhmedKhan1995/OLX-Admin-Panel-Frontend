@@ -23,3 +23,28 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+// import React from 'react';
+// import { useLocation } from 'react-router-dom';
+// import Header from './Header'; // Agar admin navbar alag hai
+// import UserNavbar from '../../pages/Navbar'; // Home page ke liye alag navbar
+
+// const Layout = ({ children }) => {
+//   const location = useLocation();
+  
+//   // Check if current route is home page
+//   const isHomePage = location.pathname === '/';
+
+//   return (
+//     <div className="min-h-screen bg-gray-50">
+//       {/* Home page pe UserNavbar show karo, baaki pages pe AdminNavbar */}
+//       {isHomePage ? <UserNavbar /> : <Header  />}
+      
+//       <main className={isHomePage ? '' : 'pt-16'}>
+//         {children}
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default Layout;

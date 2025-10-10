@@ -99,3 +99,50 @@ export const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
+
+
+// context/AppContext.js
+// import { createContext, useState, useEffect } from 'react';
+// import { getAllProducts } from '../Redux/Actions/ProductActions';
+// import { useDispatch} from "react-redux";
+
+// export const AppContext = createContext();
+
+// export const AppProvider = ({ children }) => {
+//   const dispatch = useDispatch();
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   // Products fetch karne ka function
+//   const fetchProducts = async () => {
+//     try {
+//       setLoading(true);
+//       const productsData = await getAllProducts();
+//       setProducts(productsData);
+//     } catch (error) {
+//       console.error('Error fetching products:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Component mount hote hi products fetch karo
+//   useEffect(() => {
+//     dispatch(fetchProducts());
+//   }, []);
+
+//   const deleteProduct = (productId) => {
+//     setProducts(products.filter(product => product.id !== productId));
+//   };
+
+//   return (
+//     <AppContext.Provider value={{
+//       products,
+//       loading,
+//       deleteProduct,
+//       refetchProducts: fetchProducts // Agar refresh karna ho
+//     }}>
+//       {children}
+//     </AppContext.Provider>
+//   );
+// };
