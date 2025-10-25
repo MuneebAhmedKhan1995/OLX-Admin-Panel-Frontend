@@ -1,68 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const createProduct = createAsyncThunk('createProduct', async (data, { rejectWithValue }) => {
-//     try {
-//         console.log("Sending data:", data);
-        
-//         const response = await fetch('http://localhost:3002/user/product', {
-//             method: "POST",
-//             // headers: {
-
-//             //     "Content-Type": "application/json",
-//             // },
-//             body: data,
-//             credentials: 'include'
-//         });
-
-//         // ✅ Pehle text mein response lo
-//         const responseText = await response.text();
-//         console.log("Raw Response:", responseText);
-
-//         let result;
-//         try {
-//             // ✅ Phir JSON parse try karo
-//             result = JSON.parse(responseText);
-//         } catch (parseError) {
-//             // ✅ Agar JSON nahi hai, toh manual object banao
-//             if (response.ok) {
-//                 result = {
-//                     status: 1,
-//                     message: responseText,
-//                     data: null
-//                 };
-//             } else {
-//                 result = {
-//                     status: 0,
-//                     message: responseText,
-//                     error: "Invalid JSON response"
-//                 };
-//             }
-//         }
-
-//         console.log("Processed Result:", result);
-        
-//         if (!response.ok) {
-//             return rejectWithValue(result);
-//         }
-        
-//         return result;
-//     } catch (error) {
-//         // ✅ Better error handling
-//         const errorObj = {
-//             status: 0,
-//             message: error.message,
-//             error: "Network error"
-//         };
-//         return rejectWithValue(errorObj);
-//     }
-// });
-
 
 export const createProduct = createAsyncThunk('createProduct', async (data, { rejectWithValue }) => {
     try {
         console.log("Sending data to backend...");
         
-        const response = await fetch('http://localhost:3002/user/product', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/user/product', {
             method: "POST",
             body: data, // FormData - headers nahi chahiye
             credentials: 'include'
@@ -126,7 +69,7 @@ export const getAllProducts = createAsyncThunk('getProducts', async (data, { rej
 
         const token = getToken();
         
-        const response = await fetch('http://localhost:3002/user/products', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/user/products', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -158,7 +101,7 @@ export const deleteProduct = createAsyncThunk('deleteProduct', async (id, { reje
 
     const token = getToken();
     
-    const response = await fetch(`http://localhost:3002/user/products/${id}`, {
+    const response = await fetch(`https://olx-admin-panel-backend.vercel.app/user/products/${id}`, {
       method: 'DELETE',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -196,7 +139,7 @@ export const updateProduct = createAsyncThunk(
       
       console.log('Updating product:', id, updateData);
       
-      const response = await fetch(`http://localhost:3002/user/products/${id}`, {
+      const response = await fetch(`https://olx-admin-panel-backend.vercel.app/user/products/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

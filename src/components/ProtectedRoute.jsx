@@ -8,7 +8,7 @@ export const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:3002/auth/me', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/auth/me', {
           credentials: 'include', // cookies ke liye important hai
           method: "GET",
         });

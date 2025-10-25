@@ -4,7 +4,7 @@ export const createCategory = createAsyncThunk('createCategory', async (data, { 
     try {
         console.log("Sending data:", data);
         
-        const response = await fetch('http://localhost:3002/category', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/category', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const getAllCategory = createAsyncThunk('getCategory', async (data, { rej
 
         const token = getToken();
         
-        const response = await fetch('http://localhost:3002/categorys', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/categorys', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -104,7 +104,7 @@ export const deleteCategory = createAsyncThunk('deleteCategory', async (id, { re
     
     console.log('Sending DELETE request for ID:', id); // ✅ Debug log
     
-    const response = await fetch(`http://localhost:3002/category/${id}`, {
+    const response = await fetch(`https://olx-admin-panel-backend.vercel.app/category/${id}`, {
       method: 'DELETE',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -149,7 +149,7 @@ export const updateCategory = createAsyncThunk(
       
       console.log('Updating product:', id, updateData);
       
-      const response = await fetch(`http://localhost:3002/category/${id}`, {
+      const response = await fetch(`https://olx-admin-panel-backend.vercel.app/category/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

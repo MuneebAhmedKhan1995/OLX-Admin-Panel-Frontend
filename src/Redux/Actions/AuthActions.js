@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const registerUser = createAsyncThunk('registerUser', async (data, { rejectWithValue }) => {
     try {
         console.log(data,)
-        const response = await fetch('http://localhost:3002/register', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/register', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const registerUser = createAsyncThunk('registerUser', async (data, { reje
 // export const loginUser = createAsyncThunk('loginUser', async (data, { rejectWithValue }) => {
 //     try {
 //         console.log(data,)
-//         const response = await fetch('http://localhost:3002/signIn', {
+//         const response = await fetch('https://olx-admin-panel-backend.vercel.app/signIn', {
 //             method: "POST",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const registerUser = createAsyncThunk('registerUser', async (data, { reje
 export const loginUser = createAsyncThunk('loginUser', async (data, { rejectWithValue }) => {
     try {
         console.log("Sending data:", data);
-        const response = await fetch('http://localhost:3002/signIn', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/signIn', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export const loginUser = createAsyncThunk('loginUser', async (data, { rejectWith
 
 export const logoutUser = createAsyncThunk('logoutUser', async (data, { rejectWithValue }) => {
     try {
-        const response = await fetch('http://localhost:3002/logout', {
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/logout', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
