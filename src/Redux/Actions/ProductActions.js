@@ -93,7 +93,7 @@ export const createProduct = createAsyncThunk('createProduct', async (data, { re
 export const getAllProducts = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {
         // Cookies ke through hi call karo, Bearer token nahi
-        const response = await fetch('https://olx-admin-panel-backend.vercel.app/products', { // Path change karo
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/user/products', { // Path change karo
             method: 'GET',
             credentials: 'include', // Cookies ke liye important
             headers: {
