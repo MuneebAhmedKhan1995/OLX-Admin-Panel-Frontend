@@ -33,7 +33,7 @@ export const ProtectedRoute = ({ children }) => {
 
   // Redirect agar authenticated nahi hai
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    // return <Navigate to="/login" replace />;
   }
 
   return children;
