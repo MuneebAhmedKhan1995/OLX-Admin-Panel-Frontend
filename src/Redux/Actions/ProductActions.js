@@ -57,22 +57,46 @@ export const createProduct = createAsyncThunk('createProduct', async (data, { re
     }
 });
 
+// export const getAllProducts = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
+//     try {
+//         // Get token from cookies
+//         const getToken = () => {
+//             return document.cookie
+//                 .split('; ')
+//                 .find(row => row.startsWith('token='))
+//                 ?.split('=')[1];
+//         };
+
+//         const token = getToken();
+        
+//         const response = await fetch('https://olx-admin-panel-backend.vercel.app/user/products', {
+//             method: 'GET',
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+        
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+        
+//         const result = await response.json()
+//         console.log(result)
+//         return result
+//     } catch (error) {
+//         return rejectWithValue(error.message)
+//     }
+// })
+
+// AuthActions.js - getAllProducts update karo
 export const getAllProducts = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {
-        // Get token from cookies
-        const getToken = () => {
-            return document.cookie
-                .split('; ')
-                .find(row => row.startsWith('token='))
-                ?.split('=')[1];
-        };
-
-        const token = getToken();
-        
-        const response = await fetch('https://olx-admin-panel-backend.vercel.app/user/products', {
+        // Cookies ke through hi call karo, Bearer token nahi
+        const response = await fetch('https://olx-admin-panel-backend.vercel.app/products', { // Path change karo
             method: 'GET',
+            credentials: 'include', // Cookies ke liye important
             headers: {
-                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -82,7 +106,7 @@ export const getAllProducts = createAsyncThunk('getProducts', async (data, { rej
         }
         
         const result = await response.json()
-        console.log(result)
+        console.log("Products response:", result)
         return result
     } catch (error) {
         return rejectWithValue(error.message)
