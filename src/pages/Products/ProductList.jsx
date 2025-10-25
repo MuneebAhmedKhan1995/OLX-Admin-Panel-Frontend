@@ -134,15 +134,17 @@ const ProductList = () => {
           <p className="text-gray-500">No products found.</p>
         </div>
       ) : (
+       
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {productsArray.map((product) => (
-            <div 
-              key={product._id || product.id} 
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
+  {productsArray.map((product, index) => (
+    <div 
+      key={product._id || product.id || `product-${index}`} 
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+    >
               <div className="h-48 bg-gray-200 overflow-hidden">
                 <img
-                  src={product.image || placeholderImage}
+                  src={product.images?.[0] || product.image || placeholderImage}
+                 
                   alt={product.title || 'Product Image'}
                   className="w-full h-full object-cover"
                   onError={(e) => {

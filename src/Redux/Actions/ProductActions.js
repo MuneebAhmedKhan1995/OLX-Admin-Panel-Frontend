@@ -1,41 +1,100 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+// export const createProduct = createAsyncThunk('createProduct', async (data, { rejectWithValue }) => {
+//     try {
+//         console.log("Sending data:", data);
+        
+//         const response = await fetch('http://localhost:3002/user/product', {
+//             method: "POST",
+//             // headers: {
+
+//             //     "Content-Type": "application/json",
+//             // },
+//             body: data,
+//             credentials: 'include'
+//         });
+
+//         // ✅ Pehle text mein response lo
+//         const responseText = await response.text();
+//         console.log("Raw Response:", responseText);
+
+//         let result;
+//         try {
+//             // ✅ Phir JSON parse try karo
+//             result = JSON.parse(responseText);
+//         } catch (parseError) {
+//             // ✅ Agar JSON nahi hai, toh manual object banao
+//             if (response.ok) {
+//                 result = {
+//                     status: 1,
+//                     message: responseText,
+//                     data: null
+//                 };
+//             } else {
+//                 result = {
+//                     status: 0,
+//                     message: responseText,
+//                     error: "Invalid JSON response"
+//                 };
+//             }
+//         }
+
+//         console.log("Processed Result:", result);
+        
+//         if (!response.ok) {
+//             return rejectWithValue(result);
+//         }
+        
+//         return result;
+//     } catch (error) {
+//         // ✅ Better error handling
+//         const errorObj = {
+//             status: 0,
+//             message: error.message,
+//             error: "Network error"
+//         };
+//         return rejectWithValue(errorObj);
+//     }
+// });
+
+
 export const createProduct = createAsyncThunk('createProduct', async (data, { rejectWithValue }) => {
     try {
-        console.log("Sending data:", data);
+        console.log("Sending data to backend...");
         
         const response = await fetch('http://localhost:3002/user/product', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
+            body: data, // FormData - headers nahi chahiye
             credentials: 'include'
         });
 
-        // ✅ Pehle text mein response lo
+        console.log("Response status:", response.status);
+        
         const responseText = await response.text();
         console.log("Raw Response:", responseText);
 
+        // ✅ Check if response is HTML error page
+        if (responseText.includes('<!DOCTYPE html>') || responseText.includes('<html>')) {
+            console.error("❌ Backend returned HTML error page");
+            
+            // Backend server check karne ke liye message
+            return rejectWithValue({
+                status: 0,
+                message: "Backend server error - Check backend console",
+                error: "HTML Error Page Received"
+            });
+        }
+
         let result;
         try {
-            // ✅ Phir JSON parse try karo
             result = JSON.parse(responseText);
         } catch (parseError) {
-            // ✅ Agar JSON nahi hai, toh manual object banao
-            if (response.ok) {
-                result = {
-                    status: 1,
-                    message: responseText,
-                    data: null
-                };
-            } else {
-                result = {
-                    status: 0,
-                    message: responseText,
-                    error: "Invalid JSON response"
-                };
-            }
+            console.error("❌ JSON Parse Error:", parseError);
+            return rejectWithValue({
+                status: 0,
+                message: "Invalid response from server",
+                error: "JSON Parse Error"
+            });
         }
 
         console.log("Processed Result:", result);
@@ -46,16 +105,14 @@ export const createProduct = createAsyncThunk('createProduct', async (data, { re
         
         return result;
     } catch (error) {
-        // ✅ Better error handling
-        const errorObj = {
+        console.error("❌ Network Error:", error);
+        return rejectWithValue({
             status: 0,
             message: error.message,
             error: "Network error"
-        };
-        return rejectWithValue(errorObj);
+        });
     }
 });
-
 
 export const getAllProducts = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {

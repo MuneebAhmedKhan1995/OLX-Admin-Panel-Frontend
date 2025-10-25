@@ -90,6 +90,7 @@ export const getAllCategory = createAsyncThunk('getCategory', async (data, { rej
 })
 
 
+
 export const deleteCategory = createAsyncThunk('deleteCategory', async (id, { rejectWithValue }) => {
   try {
     const getToken = () => {
